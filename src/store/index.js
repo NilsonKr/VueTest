@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		userList: { isParse: false, values: [] },
-		locationList: [],
+		locationList: { isParse: false, values: [] },
 		positionList: [],
 		contractList: [],
 	},
@@ -35,7 +35,7 @@ export default new Vuex.Store({
 			const contracts = await fetchData('http://localhost:3004/contracts');
 
 			commit('setPositions', positions);
-			commit('setLocations', locations);
+			commit('setLocations', { isParse: false, values: locations });
 			commit('setUsers', { isParse: false, values: users });
 			commit('setContracts', contracts);
 

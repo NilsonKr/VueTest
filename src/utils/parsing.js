@@ -25,7 +25,7 @@ const orderUsers = usersList => {
 	return ordered;
 };
 
-const parseUsers = (users, locations, positions, contracts) => {
+export const parseUsers = (users, locations, positions, contracts) => {
 	const parsedUsers = users.map(user => {
 		const newUser = { ...user };
 
@@ -42,4 +42,23 @@ const parseUsers = (users, locations, positions, contracts) => {
 	return parsedUsers;
 };
 
-export default parseUsers;
+export const parseLocations = (locationList, userList) => {
+	const quantityUsers = userList.reduce((dicc, user) => {
+		const currentId = user.locationId[0];
+
+		if (dicc[currentId]) {
+			return { ...dicc, [currentId]: dicc[currentId] + 1 };
+		} else {
+			return { ...dicc, [currentId]: 1 };
+		}
+	}, {});
+
+	const parsedLocs = locationList.map(loc => ({
+		...loc,
+		quantity: quantityUsers[loc.id],
+	}));
+
+	const orderLocs = parsedLocs.sort((curr, next) => next.name.localeCompare(curr.name));
+
+	return orderLocs;
+};

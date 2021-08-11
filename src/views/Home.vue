@@ -14,16 +14,11 @@
 			placeholder="Type Dollar Ammount"
 		/>
 		<span>${{ dollarsToBitcoin || 'Bitcoin Value' }}</span>
-		<TableUsers :text="title" />
 	</div>
 </template>
 
 <script>
-import TableUsers from '../components/Table.vue';
-
 export default {
-	components: { TableUsers },
-
 	data() {
 		return {
 			title: 'Vista Principal',
