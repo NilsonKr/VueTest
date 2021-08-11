@@ -32,7 +32,7 @@ export default new Vuex.Store({
 			const users = await fetchData('http://localhost:3004/users');
 			const locations = await fetchData('http://localhost:3004/locations');
 			const positions = await fetchData('http://localhost:3004/positions');
-			const contracts = await fetchData('http://localhost:3004/positions');
+			const contracts = await fetchData('http://localhost:3004/contracts');
 
 			commit('setPositions', positions);
 			commit('setLocations', locations);
