@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import LocationsTable from '../components/LocationsTable.vue';
 import { parseLocations } from '../utils/parsing';
 
@@ -45,7 +45,6 @@ export default {
 	computed: mapState(['locationList', 'userList']),
 	methods: {
 		...mapMutations(['setLocations']),
-		...mapActions(['INITIAL_DATA']),
 		parseData() {
 			const parsedData = parseLocations(this.locationList.values, this.userList.values);
 			this.setLocations({ isParse: true, values: parsedData });
@@ -62,8 +61,6 @@ export default {
 		locationList() {
 			if (!this.locationList.isParse) {
 				this.parseData();
-			} else {
-				console.log('has been parsed');
 			}
 		},
 	},

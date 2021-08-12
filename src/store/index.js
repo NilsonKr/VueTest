@@ -10,6 +10,7 @@ export default new Vuex.Store({
 		locationList: { isParse: false, values: [] },
 		positionList: [],
 		contractList: [],
+		turnTemplateList: { isParse: false, values: [] },
 	},
 	mutations: {
 		setUsers(state, newUserList) {
@@ -26,6 +27,10 @@ export default new Vuex.Store({
 		setContracts(state, newContractsList) {
 			state.contractList = newContractsList;
 		},
+
+		setTurnTemplates(state, newTurnTemplates) {
+			state.turnTemplateList = newTurnTemplates;
+		},
 	},
 	actions: {
 		async INITIAL_DATA({ commit }) {
@@ -33,11 +38,13 @@ export default new Vuex.Store({
 			const locations = await fetchData('http://localhost:3004/locations');
 			const positions = await fetchData('http://localhost:3004/positions');
 			const contracts = await fetchData('http://localhost:3004/contracts');
+			const turnTemplates = await fetchData('http://localhost:3004/turnTemplates');
 
 			commit('setPositions', positions);
 			commit('setLocations', { isParse: false, values: locations });
 			commit('setUsers', { isParse: false, values: users });
 			commit('setContracts', contracts);
+			commit('setTurnTemplates', { isParse: false, values: turnTemplates });
 
 			return users;
 		},

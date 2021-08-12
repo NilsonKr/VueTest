@@ -1,5 +1,14 @@
 const dynamicField = (field, source) => {
 	//Validate dynamic positions/locations
+
+	if (!field.length) {
+		return [
+			{
+				id: Date.now(),
+			},
+		];
+	}
+
 	if (field.length > 1) {
 		const newField = field.map(id => source.find(p => p.id === id));
 
@@ -63,4 +72,21 @@ export const parseLocations = (locationList, userList) => {
 	const orderLocs = parsedLocs.sort((curr, next) => next.name.localeCompare(curr.name));
 
 	return orderLocs;
+};
+
+export const parseTurnTemplates = (turnTemplates, locationList, positionList) => {
+	const parsedTurns = turnTemplates.map(turn => {
+		const newTurn = { ...turn };
+		//Find Total work hours
+		const startHour = turn.checkIn.split(':')[0];
+		const endHour = turn.checkOut.split(':')[0];
+		newTurn.totalHours = parseInt(endHour) - parseInt(startHour);
+
+		newTurn.locations = dynamicField(newTurn.locationId, locationList);
+		newTurn.position = positionList.find(position => position.id === newTurn.positionId);
+
+		return newTurn;
+	});
+
+	return parsedTurns;
 };

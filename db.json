@@ -737,8 +737,8 @@
 			"restType": "Horario Libre",
 			"breakTime": 60,
 			"notes": "",
-			"position": 1,
-			"locations": [1, 2, 3]
+			"positionId": 1,
+			"locationId": [1, 2, 3]
 		}
 	],
 	"turns": [
