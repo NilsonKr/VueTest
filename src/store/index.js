@@ -43,6 +43,11 @@ export default new Vuex.Store({
 		},
 
 		async API_REQUEST(store, payload) {
+			const url =
+				payload.method === 'POST'
+					? 'http://localhost:3004/users'
+					: `http://localhost:3004/users/${payload.id}`;
+
 			const headers = {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -54,7 +59,20 @@ export default new Vuex.Store({
 			};
 
 			try {
-				const response = await fetch('http://localhost:3004/users', options);
+				const response = await fetch(url, options);
+				const data = await response.json();
+
+				console.log(data);
+				return data;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async API_DELETE(store, payload) {
+			const url = `http://localhost:3004/users/${payload.id}`;
+
+			try {
+				const response = await fetch(url, { method: 'DELETE' });
 				const data = await response.json();
 
 				console.log(data);

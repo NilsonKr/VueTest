@@ -13,6 +13,8 @@ export default {
 	isActive: false,
 	isAssociated: true,
 	avatarUrl: 'https://randomuser.me/api/portraits/men/57.jpg',
-	contract: '',
+	contract: {
+		id: '',
+	},
 	employeeId: '',
 };

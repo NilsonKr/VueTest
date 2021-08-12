@@ -533,6 +533,38 @@
 			"avatarUrl": "https://randomuser.me/api/portraits/men/57.jpg"
 		}
 	],
+	"locations": [
+		{
+			"id": 1,
+			"name": "Ñuñoa",
+			"address1": "Av. José Pedro Alessandri 19",
+			"address2": null,
+			"startTime": "07:00",
+			"endTime": "22:00",
+			"region": "Metropolitana de Santiago",
+			"commune": "Ñuñoa"
+		},
+		{
+			"id": 2,
+			"name": "Providencia",
+			"address1": "Av. Nueva Providencia 1341",
+			"address2": "Local 103",
+			"startTime": "08:00",
+			"endTime": "23:00",
+			"region": "Metropolitana de Santiago",
+			"commune": "Providencia"
+		},
+		{
+			"id": 3,
+			"name": "Santiago",
+			"address1": "Estado 125",
+			"address2": null,
+			"startTime": "06:00",
+			"endTime": "00:00",
+			"region": "Metropolitana de Santiago",
+			"commune": "Santiago"
+		}
+	],
 	"positions": [
 		{
 			"id": 1,

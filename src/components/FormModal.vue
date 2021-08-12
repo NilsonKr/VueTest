@@ -80,7 +80,7 @@
 						placeholder="1 - 2"
 						min="1"
 						max="2"
-						v-model="userSelected.contract"
+						v-model="userSelected.contract.id"
 					/>
 				</label>
 			</form>

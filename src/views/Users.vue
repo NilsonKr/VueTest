@@ -59,7 +59,7 @@ export default {
 
 	methods: {
 		...mapMutations(['setUsers']),
-		...mapActions(['INITIAL_DATA', 'API_REQUEST']),
+		...mapActions(['INITIAL_DATA', 'API_REQUEST', 'API_DELETE']),
 		parseData() {
 			const parsedUsers = parseUsers(
 				this.userList.values,
@@ -73,7 +73,6 @@ export default {
 
 		handleModal(value, action) {
 			this.userSelected = USER_PLACEHOLDER;
-			console.log(action);
 			this.action = action;
 			if (value) {
 				this.showModal = value;
@@ -82,8 +81,16 @@ export default {
 			}
 		},
 
-		remove(userInfo) {
-			console.log(userInfo);
+		async remove(userInfo) {
+			await this.API_DELETE({
+				id: userInfo.id,
+			});
+			//Removing user from the UI
+			const newList = [...this.userList.values];
+			const removedUserIndex = newList.findIndex(user => user.id === userInfo.id);
+			newList.splice(removedUserIndex, 1);
+
+			this.setUsers({ isParse: true, values: newList });
 		},
 
 		edit(userInfo) {
@@ -95,24 +102,37 @@ export default {
 		submit() {
 			const newUser = {
 				...this.userSelected,
-				contract: parseInt(this.userSelected.contract),
+				contract: parseInt(this.userSelected.contract.id),
 			};
 			const isValid = validateForm(newUser);
-			if (!isValid.error) {
-				this.API_REQUEST({ method: this.action, data: newUser }).then(() => {
-					//Parse the new user and add to the view
-					const parsedUser = parseUsers(
-						[newUser],
-						this.locationList.values,
-						this.positionList,
-						this.contractList
-					);
 
-					this.setUsers({
-						isParse: true,
-						values: [...parsedUser, ...this.userList.values],
+			if (!isValid.error) {
+				if (this.action === 'POST') {
+					this.API_REQUEST({ method: this.action, data: newUser }).then(() => {
+						//Parse the new user and add to the view
+						const parsedUser = parseUsers(
+							[newUser],
+							this.locationList.values,
+							this.positionList,
+							this.contractList
+						);
+
+						this.setUsers({
+							isParse: true,
+							values: [...parsedUser, ...this.userList.values],
+						});
 					});
-				});
+				}
+
+				if (this.action === 'PUT') {
+					this.API_REQUEST({
+						method: this.action,
+						data: newUser,
+						id: newUser.id,
+					}).then(data => {
+						console.log(data);
+					});
+				}
 			}
 		},
 	},
