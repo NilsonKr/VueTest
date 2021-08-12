@@ -108,10 +108,10 @@ export default {
 
 			if (!isValid.error) {
 				if (this.action === 'POST') {
-					this.API_REQUEST({ method: this.action, data: newUser }).then(() => {
+					this.API_REQUEST({ method: this.action, data: newUser }).then(data => {
 						//Parse the new user and add to the view
 						const parsedUser = parseUsers(
-							[newUser],
+							[data],
 							this.locationList.values,
 							this.positionList,
 							this.contractList
