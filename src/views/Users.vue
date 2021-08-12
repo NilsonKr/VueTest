@@ -4,7 +4,7 @@
 			<div class="mb-6 w-full flex items-center justify-between">
 				<h1 class="text-4xl font-semibold">{{ title }}</h1>
 				<button
-					@click="handleModal"
+					@click="handleModal(null, 'POST')"
 					class="bg-green-300 hover:bg-green-200 text-white text-lg font-bold py-4 px-4 border-b-4 border-green-500 hover:border-green-300 rounded-xl"
 				>
 					Agregar
@@ -42,15 +42,8 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 import UsersTable from '../components/UsersTable.vue';
 import FormModal from '../components/FormModal.vue';
 import { parseUsers } from '../utils/parsing';
-
-const USER_PLACEHOLDER = {
-	firstName: '',
-	lastName: '',
-	email: '',
-	dateOfBirth: '',
-	contract: { id: '' },
-	employeeId: '',
-};
+import validateForm from '../utils/validateForm';
+import USER_PLACEHOLDER from '../utils/userPlaceHolder';
 
 export default {
 	components: { UsersTable, FormModal },
@@ -60,12 +53,13 @@ export default {
 			userSelected: USER_PLACEHOLDER,
 			title: 'Vista de Usuarios',
 			showModal: false,
+			action: '',
 		};
 	},
 
 	methods: {
 		...mapMutations(['setUsers']),
-		...mapActions(['INITIAL_DATA']),
+		...mapActions(['INITIAL_DATA', 'API_REQUEST']),
 		parseData() {
 			const parsedUsers = parseUsers(
 				this.userList.values,
@@ -77,7 +71,10 @@ export default {
 			this.setUsers({ isParse: true, values: parsedUsers });
 		},
 
-		handleModal(value) {
+		handleModal(value, action) {
+			this.userSelected = USER_PLACEHOLDER;
+			console.log(action);
+			this.action = action;
 			if (value) {
 				this.showModal = value;
 			} else {
@@ -91,11 +88,32 @@ export default {
 
 		edit(userInfo) {
 			this.showModal = true;
+			this.action = 'PUT';
 			this.userSelected = { ...userInfo };
 		},
 
 		submit() {
-			console.log(this.userSelected);
+			const newUser = {
+				...this.userSelected,
+				contract: parseInt(this.userSelected.contract),
+			};
+			const isValid = validateForm(newUser);
+			if (!isValid.error) {
+				this.API_REQUEST({ method: this.action, data: newUser }).then(() => {
+					//Parse the new user and add to the view
+					const parsedUser = parseUsers(
+						[newUser],
+						this.locationList.values,
+						this.positionList,
+						this.contractList
+					);
+
+					this.setUsers({
+						isParse: true,
+						values: [...parsedUser, ...this.userList.values],
+					});
+				});
+			}
 		},
 	},
 	computed: mapState(['userList', 'positionList', 'locationList', 'contractList']),

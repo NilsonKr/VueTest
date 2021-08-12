@@ -41,6 +41,28 @@ export default new Vuex.Store({
 
 			return users;
 		},
+
+		async API_REQUEST(store, payload) {
+			const headers = {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			};
+			const options = {
+				method: payload.method,
+				body: JSON.stringify(payload.data),
+				headers,
+			};
+
+			try {
+				const response = await fetch('http://localhost:3004/users', options);
+				const data = await response.json();
+
+				console.log(data);
+				return data;
+			} catch (error) {
+				console.log(error);
+			}
+		},
 	},
 	modules: {},
 });

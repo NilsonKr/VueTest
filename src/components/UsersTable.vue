@@ -2,7 +2,7 @@
 	<div class="w-full min-w-table min-h-table h-table overflow-y-scroll">
 		<div
 			v-for="user in userList.values"
-			:key="user.employeeId"
+			:key="user.id"
 			class="grid grid-cols-6 place-items-center border-b border-green-200 h-cell"
 		>
 			<h2>{{ user.firstName }} {{ user.lastName }}</h2>

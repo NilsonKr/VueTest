@@ -38,7 +38,7 @@ export default {
 
 	data() {
 		return {
-			title: 'Sucursales',
+			title: 'Sucursales🏙',
 		};
 	},
 

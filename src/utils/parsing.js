@@ -27,9 +27,10 @@ const orderUsers = usersList => {
 
 //Parse users list and concat their locations, positions and contract
 export const parseUsers = (users, locations, positions, contracts) => {
+	console.log(users);
 	const parsedUsers = users.map(user => {
 		const newUser = { ...user };
-
+		console.log(user.contract);
 		newUser.contract = contracts.find(c => c.id === newUser.contract);
 		newUser.locations = dynamicField(user.locationId, locations);
 		newUser.positions = dynamicField(user.positionId, positions);
