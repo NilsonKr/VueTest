@@ -25,6 +25,7 @@ const orderUsers = usersList => {
 	return ordered;
 };
 
+//Parse users list and concat their locations, positions and contract
 export const parseUsers = (users, locations, positions, contracts) => {
 	const parsedUsers = users.map(user => {
 		const newUser = { ...user };
@@ -42,6 +43,7 @@ export const parseUsers = (users, locations, positions, contracts) => {
 	return parsedUsers;
 };
 
+//Parse locations list and add their quantity of users and order them downward by their name
 export const parseLocations = (locationList, userList) => {
 	const quantityUsers = userList.reduce((dicc, user) => {
 		const currentId = user.locationId[0];

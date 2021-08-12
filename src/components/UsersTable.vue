@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full min-h-table h-table overflow-y-scroll">
+	<div class="w-full min-w-table min-h-table h-table overflow-y-scroll">
 		<div
 			v-for="user in userList.values"
 			:key="user.employeeId"
@@ -23,14 +23,16 @@
 			>
 				<h2>{{ user.contract.legalMaxWeeklyHours }}h</h2>
 			</div>
-			<h2>{{ user.employeeId }}h</h2>
+			<h2>{{ user.employeeId }}</h2>
 			<div>
 				<button
+					@click="edit(user)"
 					class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded-md"
 				>
 					Editar
 				</button>
 				<button
+					@click="remove(user)"
 					class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded-full ml-4"
 				>
 					Borrar
@@ -44,6 +46,8 @@
 export default {
 	props: {
 		userList: Object,
+		edit: Function,
+		remove: Function,
 	},
 };
 </script>

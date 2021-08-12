@@ -10,6 +10,9 @@ module.exports = {
 				cell: '80px',
 				table: '700px',
 			},
+			minWidth: {
+				table: '1050px',
+			},
 		},
 	},
 	variants: {
