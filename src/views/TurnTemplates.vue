@@ -3,7 +3,7 @@
 		<section class="overflow-x-scroll lg:overflow-x-auto">
 			<h2 class="text-4xl font-semibold mb-6">{{ title }} ⚒</h2>
 			<div
-				class="min-w-table grid grid-cols-6 place-items-center bg-pink-300 p-4 rounded-t-2xl"
+				class="min-w-table grid grid-cols-6 place-items-center bg-pink-300 p-4 rounded-t-2xl font-semibold text-lg"
 			>
 				<h2>Nombre</h2>
 				<h2>Hr de entrada - Hr de salida</h2>

@@ -12,7 +12,7 @@
 			</div>
 			<section class="overflow-x-scroll lg:overflow-x-auto">
 				<div
-					class="min-w-table grid grid-cols-6 place-items-center bg-green-200 p-4 rounded-t-2xl"
+					class="min-w-table grid grid-cols-6 place-items-center bg-green-200 p-4 rounded-t-2xl font-semibold text-lg"
 				>
 					<h2>Nombre Completo</h2>
 					<h2>Cargo</h2>

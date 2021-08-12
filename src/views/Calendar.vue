@@ -21,11 +21,40 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+import { parseCalendar } from '../utils/parsing';
+
 export default {
 	data() {
 		return {
 			title: 'Turnos',
 		};
+	},
+	computed: mapState(['calendar', 'userList', 'turnTemplateList']),
+
+	methods: {
+		...mapMutations(['setCalendar']),
+		parseData() {
+			parseCalendar(
+				this.calendar.values,
+				this.userList.values,
+				this.turnTemplateList.values
+			);
+		},
+	},
+
+	created() {
+		if (!this.calendar.isParse) {
+			this.parseData();
+		}
+	},
+
+	watch: {
+		calendar() {
+			if (!this.calendar.isParse) {
+				this.parseData();
+			}
+		},
 	},
 };
 </script>

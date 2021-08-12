@@ -34,6 +34,10 @@ const orderUsers = usersList => {
 	return ordered;
 };
 
+const orderCalendarDate = calendarParsed => {
+	calendarParsed.sort((curr, next) => curr.orderDate - next.orderDate);
+};
+
 //Parse users list and concat their locations, positions and contract
 export const parseUsers = (users, locations, positions, contracts) => {
 	const parsedUsers = users.map(user => {
@@ -89,4 +93,28 @@ export const parseTurnTemplates = (turnTemplates, locationList, positionList) =>
 	});
 
 	return parsedTurns;
+};
+
+export const parseCalendar = (calendar, userList, turnTemplates) => {
+	const calendarParsed = calendar.map(turn => {
+		const newTurn = { ...turn };
+
+		if (newTurn.userId.length) {
+			newTurn.user = dynamicField(newTurn.userId, userList);
+		} else {
+			newTurn.user = [];
+		}
+
+		newTurn.turnTemplate = turnTemplates.find(
+			turnT => turnT.id === newTurn.turnTemplateId
+		);
+
+		newTurn.orderDate = new Date(newTurn.date);
+
+		return newTurn;
+	});
+
+	orderCalendarDate(calendarParsed);
+
+	return calendarParsed;
 };
