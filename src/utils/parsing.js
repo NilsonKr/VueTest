@@ -34,8 +34,27 @@ const orderUsers = usersList => {
 	return ordered;
 };
 
+//Order and classify by date
 const orderCalendarDate = calendarParsed => {
-	calendarParsed.sort((curr, next) => curr.orderDate - next.orderDate);
+	const orderedCalendar = calendarParsed.sort(
+		(curr, next) => curr.orderDate - next.orderDate
+	);
+
+	const diccByDate = orderedCalendar.reduce((acc, turn) => {
+		const newDicc = { ...acc };
+		const date = turn.date;
+
+		//Record date in dicc with the turn
+		if (acc[date]) {
+			newDicc[date] = [...acc[date], turn];
+		} else {
+			newDicc[date] = [turn];
+		}
+
+		return newDicc;
+	}, {});
+
+	return diccByDate;
 };
 
 //Parse users list and concat their locations, positions and contract
@@ -114,7 +133,7 @@ export const parseCalendar = (calendar, userList, turnTemplates) => {
 		return newTurn;
 	});
 
-	orderCalendarDate(calendarParsed);
+	const calendarDicc = orderCalendarDate(calendarParsed);
 
-	return calendarParsed;
+	return calendarDicc;
 };

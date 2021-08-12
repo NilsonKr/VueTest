@@ -12,6 +12,7 @@ module.exports = {
 			},
 			minWidth: {
 				table: '1050px',
+				cell: '140px',
 			},
 		},
 	},

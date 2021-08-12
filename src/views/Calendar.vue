@@ -1,7 +1,8 @@
 <template>
-	<div class="bg-gray-200 rounded-md p-3">
-		<h1 class="text-2xl text-gray-800">{{ title }}</h1>
-		<div class="flex flex-col space-y-10">
+	<div>
+		<NotAssignedTurns v-show="calendar.isParse" :turnsList="calendar.values" />
+		<AssignedTurns v-show="calendar.isParse" :turnsList="calendar.values" />
+		<!-- <div class="flex flex-col space-y-10">
 			<div class="w-full text-center text-gray-600 font-bold text-lg">
 				<p>Ejemplo de Tabla 1 Turnos No Asignados</p>
 				<img
@@ -16,15 +17,22 @@
 					alt="imagen ejemplo de turnos asignados"
 				/>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex';
 import { parseCalendar } from '../utils/parsing';
+import NotAssignedTurns from '../components/NotAssignedTurns.vue';
+import AssignedTurns from '../components/AssignedTurns.vue';
 
 export default {
+	components: {
+		NotAssignedTurns,
+		AssignedTurns,
+	},
+
 	data() {
 		return {
 			title: 'Turnos',
@@ -35,11 +43,13 @@ export default {
 	methods: {
 		...mapMutations(['setCalendar']),
 		parseData() {
-			parseCalendar(
+			const calendarParsed = parseCalendar(
 				this.calendar.values,
 				this.userList.values,
 				this.turnTemplateList.values
 			);
+
+			this.setCalendar({ isParse: true, values: calendarParsed });
 		},
 	},
 
