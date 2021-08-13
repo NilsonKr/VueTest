@@ -114,6 +114,7 @@ export const parseTurnTemplates = (turnTemplates, locationList, positionList) =>
 	return parsedTurns;
 };
 
+// Parse turns by date
 export const parseCalendar = (calendar, userList, turnTemplates) => {
 	const calendarParsed = calendar.map(turn => {
 		const newTurn = { ...turn };
@@ -136,4 +137,28 @@ export const parseCalendar = (calendar, userList, turnTemplates) => {
 	const calendarDicc = orderCalendarDate(calendarParsed);
 
 	return calendarDicc;
+};
+
+export const assignedTurns = (userList, calendar) => {
+	const dates = Object.keys(calendar);
+	const usersWithTurns = userList.map(user => {
+		const newUser = {
+			id: user.id,
+			name: `${user.firstName} ${user.lastName}`,
+			turns: {},
+		};
+
+		//Set Turns by date for each user
+		newUser.turns = dates.reduce((acc, date) => {
+			const newCalendar = { ...acc };
+
+			newCalendar[date] = calendar[date].filter(turn => turn.userId.includes(user.id));
+
+			return newCalendar;
+		}, {});
+
+		return newUser;
+	});
+
+	return usersWithTurns;
 };

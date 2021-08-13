@@ -5,14 +5,24 @@ module.exports = {
 		extend: {
 			minHeight: {
 				table: '500px',
+				cell: '100px',
 			},
 			height: {
-				cell: '80px',
-				table: '700px',
+				cell: '100px',
+				table: '800px',
+			},
+			width: {
+				cell: '160px',
 			},
 			minWidth: {
 				table: '1050px',
+				cell: '160px',
+			},
+			gridAutoColumns: {
 				cell: '140px',
+			},
+			gridAutoRows: {
+				cell: '80px',
 			},
 		},
 	},

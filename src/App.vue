@@ -33,7 +33,7 @@ export default {
 /* Track */
 ::-webkit-scrollbar-track {
 	border-radius: 20px;
-	background: #edf2f7;
+	background: #edf2f700;
 }
 
 /* Handle */
