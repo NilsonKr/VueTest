@@ -33,7 +33,7 @@
 					>
 						<h2>ID: {{ turn.id }}</h2>
 						<h2 class="font-semibold">
-							{{ turn.turnTemplate ? turn.turnTemplate.name : '---' }}
+							{{ turn.turnTemplate ? turn.turnTemplate.name : 'VACACIONES' }}
 						</h2>
 						<h2>
 							(
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { assignedTurns } from '../utils/parsing.js';
+import { assignedTurns } from '../lib/parsing.js';
 
 export default {
 	props: {

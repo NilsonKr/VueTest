@@ -19,7 +19,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
-import { parseTurnTemplates } from '../utils/parsing';
+import { parseTurnTemplates } from '../lib/parsing';
 import TurnTable from '../components/TurnTable.vue';
 
 export default {

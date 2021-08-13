@@ -9,7 +9,7 @@ module.exports = {
 			},
 			height: {
 				cell: '100px',
-				table: '800px',
+				table: '750px',
 			},
 			width: {
 				cell: '160px',

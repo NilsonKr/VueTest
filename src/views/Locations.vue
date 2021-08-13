@@ -31,7 +31,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import LocationsTable from '../components/LocationsTable.vue';
-import { parseLocations } from '../utils/parsing';
+import { parseLocations } from '../lib/parsing';
 
 export default {
 	components: { LocationsTable },

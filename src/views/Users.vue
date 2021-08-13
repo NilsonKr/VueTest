@@ -41,7 +41,7 @@
 import { mapState, mapMutations, mapActions } from 'vuex';
 import UsersTable from '../components/UsersTable.vue';
 import FormModal from '../components/FormModal.vue';
-import { parseUsers } from '../utils/parsing';
+import { parseUsers } from '../lib/parsing';
 import validateForm from '../utils/validateForm';
 import USER_PLACEHOLDER from '../utils/userPlaceHolder';
 
@@ -51,7 +51,7 @@ export default {
 	data() {
 		return {
 			userSelected: USER_PLACEHOLDER,
-			title: 'Vista de Usuarios',
+			title: 'Vista de usuarios',
 			showModal: false,
 			action: '',
 		};
@@ -121,6 +121,8 @@ export default {
 							isParse: true,
 							values: [...parsedUser, ...this.userList.values],
 						});
+
+						this.showModal = false;
 					});
 				}
 
@@ -129,8 +131,8 @@ export default {
 						method: this.action,
 						data: newUser,
 						id: newUser.id,
-					}).then(data => {
-						console.log(data);
+					}).then(() => {
+						this.showModal = false;
 					});
 				}
 			}
