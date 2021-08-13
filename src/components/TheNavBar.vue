@@ -1,20 +1,25 @@
 <template>
-	<nav id="nav" class="sticky flex p-4 space-x-6 bg-white shadow-md w-full h-16">
+	<nav
+		id="nav"
+		class="sticky flex flex-wrap justify-center p-4 space-x-6 bg-white shadow-md w-full lg:justify-start"
+	>
 		<router-link to="/" class="w-10"
 			><img src="../assets/logo.png" alt="Home"
 		/></router-link>
-		<ul class="flex items-center space-x-4 font-sans font-semibold text-lg">
+		<ul
+			class="flex flex-wrap justify-center items-center space-x-4 font-sans font-semibold text-lg"
+		>
 			<li>
-				<router-link to="/users">Users</router-link>
+				<router-link to="/users">Usuarios</router-link>
 			</li>
 			<li>
-				<router-link to="/locations">Locations</router-link>
+				<router-link to="/locations">Sucursales</router-link>
 			</li>
 			<li>
-				<router-link to="/calendar">Calendar</router-link>
+				<router-link to="/calendar">Calendario</router-link>
 			</li>
 			<li>
-				<router-link to="/shifts">Shifts</router-link>
+				<router-link to="/shifts">Turnos</router-link>
 			</li>
 		</ul>
 	</nav>
